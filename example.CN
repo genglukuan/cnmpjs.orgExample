@@ -1,6 +1,7 @@
 1、下载cnmpjs.org,运行make install（cnpmjs.org下载地址 https://codeload.github.com/cnpm/cnpmjs.org/zip/master.zip)
 2、解压master.zip之后进入cnmpjs.org
-3、编辑registryPort #私有仓库端口 
+3、编辑cnmpjs.org/config.index.js文件，修改以下参数：
+      registryPort #私有仓库端口 
       webPort #web访问端口 
       bindingHost #绑定服务ip
       dialect #currently supported: 'mysql', 'sqlite', 'postgres', 'mariadb' 使用哪种数据库，我选的mysql
