@@ -1,0 +1,43 @@
+1. Download cnmpjs.org and run make install (cnpmjs.org download address: https://codeload.github.com/cnpm/cnpmjs.org/zip/master.zip)
+
+2. Unzip the master.zip and enter the cnmpjs.org directory
+
+3. Edit the cnmpjs.org/config.index.js file and modify the following parameters
+
+Registryport - Private warehouse port
+
+Webport - Web access port
+
+Bindinghost binding service IP
+
+Which kind of database do I use? Mysql, SQLite, Postgres, MariaDB
+
+Password the password of the database
+
+IP of host database
+
+4. Run the initialization SQL to initialize the database
+
+mysql -uroot -p'youpassword' -e 'DROP DATABASE IF EXISTS cnpmjs_test;' &&\
+
+mysql -uroot -p'youpassword' -e 'CREATE DATABASE cnpmjs_test;' &&\
+
+mysql -uroot -p'youpassword' 'cnpmjs_test' < docs/db.sql &&\
+
+mysql -uroot -p'youpassword' 'cnpmjs_test' -e 'show tables;'
+
+(because I am on the local machine, I directly import docs / db.sql with MySQL terminal)
+
+5. Point to the private library address on the local command line
+
+cnpm set registry http://ip:webPort
+
+npm set registry http://ip:webPort
+
+6. Using private warehouse is different from NPM public warehouse. Using public warehouse to execute NPM install - G pageckagename on the command line will add the package to the package.json file,
+
+To use the private warehouse, you need to add the package name and version number to package.json, such as "gulp": "~ 0.1.1", and then perform NPM install synchronization, which will not load automatically. If it can load automatically, it will be perfect, maybe I will not set it,,
+
+If any big guy knows how to set it up and download it automatically, please let me know.
+
+  
