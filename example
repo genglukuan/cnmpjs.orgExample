@@ -1,0 +1,21 @@
+1、下载cnmpjs.org,运行make install（cnpmjs.org下载地址 https://codeload.github.com/cnpm/cnpmjs.org/zip/master.zip)
+2、解压master.zip之后进入cnmpjs.org
+3、编辑registryPort #私有仓库端口 
+      webPort #web访问端口 
+      bindingHost #绑定服务ip
+      dialect #currently supported: 'mysql', 'sqlite', 'postgres', 'mariadb' 使用哪种数据库，我选的mysql
+      password #数据库的密码
+      host     #数据库的IP
+ 4、运行初始化sql,初始化数据库
+ mysql -uroot -p'youpassword' -e 'DROP DATABASE IF EXISTS cnpmjs_test;' &&\
+mysql -uroot -p'youpassword' -e 'CREATE DATABASE cnpmjs_test;' &&\
+mysql -uroot -p'youpassword' 'cnpmjs_test' < docs/db.sql &&\
+mysql -uroot -p'youpassword' 'cnpmjs_test' -e 'show tables;'
+（因为我是在本机，所以直接用mysql终端导入 docs/db.sql导入）
+5、在本机命令行指向私有库地址
+cnpm set registry http://ip:webPort
+npm set registry http://ip:webPort
+6、使用私有仓库跟npm的公有仓库还是有不一样的地方，使用公有仓库在命令行执行 npm install -g pageckageName就会把包加入到package.json文件中去，
+使用私有仓库需要先把包名和版本号加入到package.json,如："gulp":"~0.1.1"，再执行npm install同步，不会自动加载，如果可以自动加载就完美了，也许是我不会设置，，
+如果有哪位大佬知道如何设置可以自动下载希望不吝告知。
+
